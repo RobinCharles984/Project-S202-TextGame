@@ -1,6 +1,5 @@
-# .circleci/config.yml
 version: 2.1
- 
+
 jobs:
   test:
     docker:
@@ -8,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Instalar dependências
+          name: Criar ambiente virtual e instalar dependências
           command: |
             python -m venv venv
             . venv/bin/activate
@@ -18,9 +17,29 @@ jobs:
           command: |
             . venv/bin/activate
             pytest --maxfail=1 --disable-warnings -v
- 
+
+  build:
+    docker:
+      - image: cimg/python:3.9
+    steps:
+      - checkout
+      - run:
+          name: Criar ambiente virtual e instalar build
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install build
+      - run:
+          name: Empacotar o projeto
+          command: |
+            . venv/bin/activate
+            python -m build
+
 workflows:
   version: 2
-  test_pipeline:
+  test_and_build:
     jobs:
       - test
+      - build:
+          requires:
+            - test
