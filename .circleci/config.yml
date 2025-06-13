@@ -16,9 +16,10 @@ jobs:
           name: Rodar testes com pytest
           command: |
             . venv/bin/activate
-            pytest --maxfail=1 --disable-warnings -v --junitxml=test-results/report.xml
-      - store_test_results:
-          path: test-results
+            pytest --maxfail=1 --disable-warnings -v --html=report.html
+      - store_artifacts:
+          path: report.html
+          destination: test-report
 
   build:
     docker:
