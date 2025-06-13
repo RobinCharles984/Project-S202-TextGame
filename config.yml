@@ -1,0 +1,26 @@
+# .circleci/config.yml
+version: 2.1
+ 
+jobs:
+  test:
+    docker:
+      - image: cimg/python:3.9
+    steps:
+      - checkout
+      - run:
+          name: Instalar dependências
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - run:
+          name: Rodar testes com pytest
+          command: |
+            . venv/bin/activate
+            pytest --maxfail=1 --disable-warnings -v
+ 
+workflows:
+  version: 2
+  test_pipeline:
+    jobs:
+      - test

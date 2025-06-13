@@ -26,6 +26,7 @@ class Player:
     
     
     def get_xp(self, xp):
+        hp_temp = 0 ########### definido temporariamente (não sei oq é isso)
         xp_levelup = 100
         self.xp += xp
         if self.xp >= xp_levelup: ##Level up system
@@ -60,6 +61,7 @@ class Player:
             print("Voce morreu!")
             print("----------------GAME OVER----------------")
             exit()
+        return False
         
 
 ##Enemies will attack player when they are at the same path and after every action
