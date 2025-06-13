@@ -43,6 +43,9 @@ class CharactersModel:
         
     
     def show_player_data(self, id: str):
+        if not isinstance(id, str):
+            raise TypeError("ID com formato inválido.")
+
         try:
             res = self.db.collection.find_one({"_id": ObjectId(id)})
             print("Player:", res["name"])
