@@ -21,6 +21,13 @@ jobs:
       - store_artifacts:
           path: report.html
           destination: test-report
+      - store_artifacts:
+          path: ./
+          destination: workspace-root
+      - persist_to_workspace:
+          root: .
+          paths:
+            - report.html
 
   build:
     docker:
