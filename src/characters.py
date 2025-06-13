@@ -15,6 +15,13 @@ charactersModel = CharactersModel(db)
 
 class Player:
     def __init__(self, hp: int, xp: int, level: int, name: str, dmg: int, dfs: int, kills: int, paths: int = None):
+        if not isinstance(hp, (int, float)):
+            raise TypeError("HP deve ser um valor numérico.")
+        if hp < 0:
+            raise ValueError("HP não pode ser negativo.")
+        if not isinstance(name, str):
+            raise TypeError("Nome deve ser uma string.")
+
         self.hp = hp
         self.xp = xp
         self.level = level
@@ -67,6 +74,15 @@ class Player:
 ##Enemies will attack player when they are at the same path and after every action
 class Enemy:
     def __init__(self, hp: int, xp: int, name: str, dmg: int, dfs: int):
+        if not isinstance(dmg, (int, float)):
+            raise TypeError("Dano (dmg) deve ser um valor numérico.")
+        if not isinstance(hp, (int, float)):
+             raise TypeError("HP deve ser um valor numérico.")
+        if not isinstance(dfs, (int, float)):
+            raise TypeError("Defesa (dfs) deve ser um valor numérico.")
+        if dfs < 0:
+            raise ValueError("Defesa (dfs) não pode ser negativa.")
+
         self.hp = hp
         self.xp = xp
         self.name = name

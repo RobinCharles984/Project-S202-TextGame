@@ -93,3 +93,19 @@ def test_find_all_characters(model):
 
     model.db.collection.find.assert_called_once()
     assert list(result) == fake_cursor
+
+def test_show_player_data_com_id_invalido(model):
+    #Testa se uma string de ID mal formatada levanta um erro de InvalidId.
+    with pytest.raises(TypeError):
+        model.show_player_data(123)
+
+def test_delete_player_nao_encontrado(model):
+    #Testa o que acontece se tentamos deletar um jogador que não existe.
+    # Simula que o DB não encontrou ninguém e, portanto, não deletou nada (deleted_count = 0)
+    model.db.collection.delete_one.return_value.deleted_count = 0
+    
+    result = model.delete_player("Fantasma")
+
+    model.db.collection.delete_one.assert_called_once_with({"name": "Fantasma"})
+    # A função deve retornar 0, indicando que nenhum registro foi apagado
+    assert result == 0
