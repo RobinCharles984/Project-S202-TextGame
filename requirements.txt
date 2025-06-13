@@ -1,0 +1,13 @@
+# Requisitos principais
+pymongo==4.7.1
+
+# Testes
+pytest==8.3.1
+pytest-mock==3.14.0
+
+# Outras dependências opcionais (caso use)
+# rich==13.7.1      # para prints mais bonitos
+# python-dotenv==1.0.1  # se usar variáveis de ambiente
+
+# Fixar a versão do Python usada no projeto (comentado por padrão)
+# python==3.12.2
